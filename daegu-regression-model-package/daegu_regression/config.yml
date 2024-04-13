@@ -1,0 +1,56 @@
+package_name: daegu_regression
+
+training_data_file: train.csv
+test_data_file: test.csv
+
+pipeline_save_file: daegu_regression_model_v
+
+target: SalePrice
+
+variables_to_rename:
+  N_FacilitiesNearBy(ETC): N_FacilitiesNearBy_ETC
+  N_FacilitiesNearBy(PublicOffice): N_FacilitiesNearBy_PublicOffice
+  N_SchoolNearBy(University): N_SchoolNearBy_University
+  N_Parkinglot(Basement): N_Parkinglot_Basement
+  Size(sqf): Size_sqf
+
+features:
+  - HallwayType 
+  - TimeToSubway
+  - SubwayStation
+  - N_FacilitiesNearBy_ETC
+  - N_FacilitiesNearBy_PublicOffice
+  - N_SchoolNearBy_University
+  - N_Parkinglot_Basement
+  - YearBuilt
+  - N_FacilitiesInApt
+  - Size_sqf
+
+test_size: 0.2
+
+random_state: 42
+
+minmax_scaling_vars:
+  - N_FacilitiesNearBy_ETC
+  - N_FacilitiesNearBy_PublicOffice
+  - N_SchoolNearBy_University
+  - N_Parkinglot_Basement
+  - N_FacilitiesInApt
+
+standard_scaling_vars: 
+  - Size_sqf
+
+binning_vars:
+  - YearBuilt
+
+one_hot_vars:
+  - HallwayType
+  - TimeToSubway
+  - SubwayStation
+  - YearBuilt
+
+n_estimators: 100 
+min_samples_split: 5 
+min_samples_leaf: 1 
+max_features: sqrt 
+max_depth: 10

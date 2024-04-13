@@ -1,0 +1,18 @@
+include *.txt
+include *.md
+include *.pkl
+recursive-include ./daegu_regression/*
+
+include daegu_regression/datasets/train.csv
+include daegu_regression/datasets/test.csv
+include daegu_regression/trained_models/*.pkl
+include daegu_regression/VERSION
+include daegu_regression/config.yml
+
+include ./requirements/requirements.txt
+include ./requirements/test_requirements.txt
+exclude *.log
+exclude *.cfg
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
