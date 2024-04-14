@@ -3,10 +3,12 @@ from typing import Any
 from fastapi import FastAPI, APIRouter, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
+from loguru import logger
 
 from app.api import api_router
-from app.config import settings
+from app.config import settings, setup_app_logging
 
+setup_app_logging(config=settings)
 
 app = FastAPI(
     title = settings.PROJECT_NAME, openapi_url=f"{settings.API_V1_STR}/openapi.json"
@@ -42,5 +44,7 @@ if settings.BACKEND_CORS_ORIGINS:
     )
 
 if __name__ == "__main__":
+    logger.warning("Runnning in development mode. Do not run like this in production.")
+
     import uvicorn
     uvicorn.run(app, host="localhost", port=8001, log_level="debug")
